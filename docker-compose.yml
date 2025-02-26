@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+    container_name: elasticsearch
+    environment:
+      - "discovery.type=single-node"
+    ports:
+      - "9200:9200"
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.0
+    container_name: logstash
+    volumes:
+      - "C:/Users/User/IdeaJava/logs:/logs" # Local 로그 파일을 Logstash 컨테이너 내부로 마운트
+      - "./logstash.conf:/usr/share/logstash/pipeline/logstash.conf" # Logstash 설정 파일 마운트
+      - "./sincedb:/usr/share/logstash/data" # sincedb 정보 저장(마지막 로그부터 읽기)
+    ports:
+      - "5044:5044"
+      - "9600:9600" # Monitoring Port
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.0
+    container_name: kibana
+    ports:
+      - "5601:5601"
