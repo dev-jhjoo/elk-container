@@ -1,0 +1,4 @@
+/sincedb/dead_letter_queue/*
+/sincedb/queue/*
+/sincedb/.lock
+/sincedb/sincedb
