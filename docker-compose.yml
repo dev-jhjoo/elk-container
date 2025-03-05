@@ -11,7 +11,7 @@ services:
   logstash:
     image: docker.elastic.co/logstash/logstash:7.17.0
     container_name: logstash
-    volumes:
+    volumes: # local : container
       - "C:/Users/User/IdeaJava/logs:/logs" # Local 로그 파일을 Logstash 컨테이너 내부로 마운트
       - "./logstash.conf:/usr/share/logstash/pipeline/logstash.conf" # Logstash 설정 파일 마운트
       - "./sincedb:/usr/share/logstash/data" # sincedb 정보 저장(마지막 로그부터 읽기)
